@@ -34,7 +34,7 @@ class App extends Component {
       <div>
         <Reboot />
         <ApolloProvider client={apolloClient}>
-          <Router>
+          <Router basename="/news-admin">
             <MiniDrawer>
               <Switch>
                 <Redirect
