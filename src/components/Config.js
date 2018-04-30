@@ -6,6 +6,7 @@ import { withStyles } from 'material-ui/styles/index'
 import { Button, CircularProgress, Paper } from 'material-ui'
 import ReactJson from 'react-json-view'
 import SaveIcon from 'material-ui-icons/Save'
+import isEqual from 'lodash/isEqual'
 
 
 const styles = theme => ({
@@ -24,7 +25,7 @@ const styles = theme => ({
     top: theme.spacing.unit * 5,
     right: theme.spacing.unit * 2,
     zIndex: 9999
-  },
+  }
 })
 
 class Config extends React.Component {
@@ -34,8 +35,8 @@ class Config extends React.Component {
 
   componentWillReceiveProps(nextProps, nextContext) {
     this.setState({
-      data: nextProps.configQuery.allConfigs[0].data || {},
-      id: nextProps.configQuery.allConfigs[0].id
+      data: nextProps.configQuery.allConfigs[ 0 ].data || {},
+      id: nextProps.configQuery.allConfigs[ 0 ].id
     })
   }
 
@@ -50,30 +51,34 @@ class Config extends React.Component {
 
     return (
       <div>
-        <Button variant='fab' className={classes.fab} onClick={this.handleUpdate} color='secondary'>
+        <Button variant='fab'
+                className={classes.fab}
+                onClick={this.handleUpdate}
+                color='secondary'
+                disabled={isEqual(this.state.data, this.props.configQuery.allConfigs[0].data)}>
           <SaveIcon />
         </Button>
         <Paper className={classes.root}>
-        <ReactJson
-          name={false}
-          collapsed={false}
-          src={this.state.data}
-          collapseStringsAfterLength={32}
-          onEdit={e =>
-            this.setState({ data: e.updated_src })
-          }
-          onDelete={e =>
-            this.setState({ data: e.updated_src })
-          }
-          onAdd={e =>
-            this.setState({ data: e.updated_src })
-          }
-          displayObjectSize={true}
-          enableClipboard={false}
-          indentWidth={4}
-          displayDataTypes={false}
-          iconStyle={"triangle"}
-        />
+          <ReactJson
+            name={false}
+            collapsed={false}
+            src={this.state.data}
+            collapseStringsAfterLength={32}
+            onEdit={e =>
+              this.setState({ data: e.updated_src })
+            }
+            onDelete={e =>
+              this.setState({ data: e.updated_src })
+            }
+            onAdd={e =>
+              this.setState({ data: e.updated_src })
+            }
+            displayObjectSize={true}
+            enableClipboard={false}
+            indentWidth={4}
+            displayDataTypes={false}
+            iconStyle={'triangle'}
+          />
         </Paper>
       </div>
     )
@@ -83,7 +88,7 @@ class Config extends React.Component {
     await this.props.updateConfigMutation({
       variables: {
         configId: this.state.id,
-        configData: this.state.data,
+        configData: this.state.data
       }
     })
     this.props.configQuery.refetch()
