@@ -4,6 +4,7 @@ import classNames from 'classnames'
 import MenuIcon from 'material-ui-icons/Menu'
 import ChevronLeftIcon from 'material-ui-icons/ChevronLeft'
 import BorderColorIcon from 'material-ui-icons/BorderColor'
+import SettingsIcon from 'material-ui-icons/Settings'
 import ExitToAppIcon from 'material-ui-icons/ExitToApp'
 import ChevronRightIcon from 'material-ui-icons/ChevronRight'
 import {
@@ -154,6 +155,12 @@ class MiniDrawer extends React.Component {
                     <BorderColorIcon />
                   </ListItemIcon>
                   <ListItemText primary='Sources' />
+                </ListItem>
+                <ListItem button onClick={() => this.props.history.push('/config')}>
+                  <ListItemIcon>
+                    <SettingsIcon />
+                  </ListItemIcon>
+                  <ListItemText primary='Config' />
                 </ListItem>
               </List>
               <Divider />

@@ -4,6 +4,7 @@ import Home from '../components/Home'
 import ListSource from '../components/sources/ListSource'
 import CreateSource from '../components/sources/CreateSource'
 import DetailSource from '../components/sources/DetailSource'
+import Config from '../components/Config'
 
 export const publicRoutes = [
   {
@@ -28,6 +29,10 @@ export const privateRoutes = [
   {
     path: '/sources',
     component: ListSource
+  },
+  {
+    path: '/config',
+    component: Config
   },
   {
     component: NotFound
