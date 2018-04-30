@@ -35,8 +35,8 @@ class Config extends React.Component {
 
   componentWillReceiveProps(nextProps, nextContext) {
     this.setState({
-      data: nextProps.configQuery.allConfigs[ 0 ].data || {},
-      id: nextProps.configQuery.allConfigs[ 0 ].id
+      data: nextProps.configQuery.allConfigs[0].data || {},
+      id: nextProps.configQuery.allConfigs[0].id
     })
   }
 
