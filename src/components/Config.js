@@ -3,12 +3,19 @@ import { compose, graphql } from 'react-apollo'
 import { withRouter } from 'react-router-dom'
 import gql from 'graphql-tag'
 import { withStyles } from 'material-ui/styles/index'
-import { Button, CircularProgress } from 'material-ui'
+import { Button, CircularProgress, Paper } from 'material-ui'
 import ReactJson from 'react-json-view'
 import SaveIcon from 'material-ui-icons/Save'
 
 
 const styles = theme => ({
+  root: {
+    maxWidth: '720px',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    marginTop: theme.spacing.unit * 3,
+    padding: theme.spacing.unit * 2
+  },
   progress: {
     margin: `0 ${theme.spacing.unit * 2}px`
   },
@@ -46,6 +53,7 @@ class Config extends React.Component {
         <Button variant='fab' className={classes.fab} onClick={this.handleUpdate} color='secondary'>
           <SaveIcon />
         </Button>
+        <Paper className={classes.root}>
         <ReactJson
           name={false}
           collapsed={false}
@@ -66,6 +74,7 @@ class Config extends React.Component {
           displayDataTypes={false}
           iconStyle={"triangle"}
         />
+        </Paper>
       </div>
     )
   }
