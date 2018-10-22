@@ -137,7 +137,7 @@ class MiniDrawer extends React.Component {
                 <MenuIcon />
               </IconButton>
               <Typography
-                variant="title"
+                variant="h6"
                 color="inherit"
                 noWrap
                 onClick={() => this.props.history.push('/home')}
