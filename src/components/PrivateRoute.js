@@ -3,14 +3,14 @@ import { Redirect, Route } from 'react-router-dom';
 
 class PrivateRoute extends React.Component {
   render() {
-    const { component: Component, ...rest } = this.props;
+    const { render, ...rest } = this.props;
 
     return (
       <Route
         {...rest}
         render={props =>
           localStorage.getItem('newsToken') ? (
-            <Component {...props} />
+            render(props)
           ) : (
             <Redirect
               to={{

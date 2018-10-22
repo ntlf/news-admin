@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
@@ -18,24 +19,15 @@ import ListItemIcon from '@material-ui/core/ListItemIcon/ListItemIcon';
 import BorderColorIcon from '@material-ui/icons/BorderColor';
 import SettingsIcon from '@material-ui/icons/Settings';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import CssBaseline from '@material-ui/core/CssBaseline/CssBaseline';
 
 const drawerWidth = 240;
 
 const styles = theme => ({
   root: {
-    width: '100%',
-    height: '100vh',
-    zIndex: 1,
-    overflow: 'hidden'
-  },
-  appFrame: {
-    position: 'relative',
-    display: 'flex',
-    width: '100%',
-    height: '100%'
+    display: 'flex'
   },
   appBar: {
-    position: 'absolute',
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
@@ -59,7 +51,8 @@ const styles = theme => ({
   },
   drawerPaper: {
     position: 'relative',
-    height: '100%',
+    whiteSpace: 'nowrap',
+    minHeight: '100vh',
     width: drawerWidth,
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
@@ -67,18 +60,17 @@ const styles = theme => ({
     })
   },
   drawerPaperClose: {
-    width: 60,
     overflowX: 'hidden',
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
-    })
+    }),
+    width: theme.spacing.unit * 7,
+    [theme.breakpoints.up('sm')]: {
+      width: theme.spacing.unit * 9
+    }
   },
-  drawerInner: {
-    // Make the items inside not wrap when transitioning:
-    width: drawerWidth
-  },
-  drawerHeader: {
+  toolbar: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-end',
@@ -86,20 +78,12 @@ const styles = theme => ({
     ...theme.mixins.toolbar
   },
   content: {
-    width: '100%',
     flexGrow: 1,
-    backgroundColor: theme.palette.background.default,
-    padding: 24,
-    height: 'calc(100% - 56px)',
-    marginTop: 56,
-    [theme.breakpoints.up('sm')]: {
-      height: 'calc(100% - 64px)',
-      marginTop: 64
-    }
+    padding: theme.spacing.unit * 3
   }
 });
 
-class MiniDrawer extends React.Component {
+class MiniDrawer extends Component {
   state = {
     open: false
   };
@@ -113,102 +97,98 @@ class MiniDrawer extends React.Component {
   };
 
   render() {
-    const { classes, theme } = this.props;
+    const { classes, theme, history, children } = this.props;
+    const { open } = this.state;
 
     return (
       <div className={classes.root}>
-        <div className={classes.appFrame}>
-          <AppBar
-            className={classNames(
-              classes.appBar,
-              this.state.open && classes.appBarShift
-            )}
-          >
-            <Toolbar disableGutters={!this.state.open}>
-              <IconButton
-                color="inherit"
-                aria-label="open drawer"
-                onClick={this.handleDrawerOpen}
-                className={classNames(
-                  classes.menuButton,
-                  this.state.open && classes.hide
-                )}
-              >
-                <MenuIcon />
-              </IconButton>
-              <Typography
-                variant="h6"
-                color="inherit"
-                noWrap
-                onClick={() => this.props.history.push('/home')}
-              >
-                News Admin
-              </Typography>
-            </Toolbar>
-          </AppBar>
-          <Drawer
-            variant="permanent"
-            classes={{
-              paper: classNames(
-                classes.drawerPaper,
-                !this.state.open && classes.drawerPaperClose
-              )
-            }}
-            open={this.state.open}
-          >
-            <div className={classes.drawerInner}>
-              <div className={classes.drawerHeader}>
-                <IconButton onClick={this.handleDrawerClose}>
-                  {theme.direction === 'rtl' ? (
-                    <ChevronRightIcon />
-                  ) : (
-                    <ChevronLeftIcon />
-                  )}
-                </IconButton>
-              </div>
-              <Divider />
-              <List className={classes.list}>
-                <ListItem
-                  button
-                  onClick={() => this.props.history.push('/sources')}
-                >
-                  <ListItemIcon>
-                    <BorderColorIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Sources" />
-                </ListItem>
-                <ListItem
-                  button
-                  onClick={() => this.props.history.push('/config')}
-                >
-                  <ListItemIcon>
-                    <SettingsIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Config" />
-                </ListItem>
-              </List>
-              <Divider />
-              <List className={classes.list}>
-                <ListItem
-                  button
-                  onClick={() => {
-                    localStorage.removeItem('newsToken');
-                    this.props.history.replace('/login');
-                  }}
-                >
-                  <ListItemIcon>
-                    <ExitToAppIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Logout " />
-                </ListItem>
-              </List>
-            </div>
-          </Drawer>
-          <main className={classes.content}>{this.props.children}</main>
-        </div>
+        <CssBaseline />
+        <AppBar
+          position="fixed"
+          className={classNames(classes.appBar, {
+            [classes.appBarShift]: open
+          })}
+        >
+          <Toolbar disableGutters={!open}>
+            <IconButton
+              color="inherit"
+              aria-label="Open drawer"
+              onClick={this.handleDrawerOpen}
+              className={classNames(classes.menuButton, {
+                [classes.hide]: open
+              })}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" color="inherit" noWrap>
+              News Admin
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <Drawer
+          variant="permanent"
+          classes={{
+            paper: classNames(
+              classes.drawerPaper,
+              !open && classes.drawerPaperClose
+            )
+          }}
+          open={open}
+        >
+          <div className={classes.toolbar}>
+            <IconButton onClick={this.handleDrawerClose}>
+              {theme.direction === 'rtl' ? (
+                <ChevronRightIcon />
+              ) : (
+                <ChevronLeftIcon />
+              )}
+            </IconButton>
+          </div>
+          <Divider />
+          <List className={classes.list}>
+            <ListItem button onClick={() => history.push('/sources')}>
+              <ListItemIcon>
+                <BorderColorIcon />
+              </ListItemIcon>
+              <ListItemText primary="Sources" />
+            </ListItem>
+            <ListItem button onClick={() => history.push('/config')}>
+              <ListItemIcon>
+                <SettingsIcon />
+              </ListItemIcon>
+              <ListItemText primary="Config" />
+            </ListItem>
+          </List>
+          <Divider />
+          <List className={classes.list}>
+            <ListItem
+              button
+              onClick={() => {
+                localStorage.removeItem('newsToken');
+                history.replace('/login');
+              }}
+            >
+              <ListItemIcon>
+                <ExitToAppIcon />
+              </ListItemIcon>
+              <ListItemText primary="Logout " />
+            </ListItem>
+          </List>
+        </Drawer>
+        <main className={classes.content}>
+          <div className={classes.toolbar} />
+          {children}
+        </main>
       </div>
     );
   }
 }
+
+MiniDrawer.propTypes = {
+  classes: PropTypes.shape().isRequired,
+  theme: PropTypes.shape().isRequired,
+  history: PropTypes.shape().isRequired,
+  children: PropTypes.element
+};
 
 export default withRouter(withStyles(styles, { withTheme: true })(MiniDrawer));

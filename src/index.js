@@ -5,6 +5,8 @@ import 'typeface-roboto';
 import { ApolloProvider } from 'react-apollo';
 import ApolloClient from 'apollo-boost';
 import { BrowserRouter as Router } from 'react-router-dom';
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 
@@ -20,10 +22,18 @@ const client = new ApolloClient({
   }
 });
 
+const theme = createMuiTheme({
+  typography: {
+    useNextVariants: true
+  }
+});
+
 ReactDOM.render(
   <Router>
     <ApolloProvider client={client}>
-      <App />
+      <MuiThemeProvider theme={theme}>
+        <App />
+      </MuiThemeProvider>
     </ApolloProvider>
   </Router>,
   document.getElementById('root')
