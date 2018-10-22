@@ -2,11 +2,13 @@ import React from 'react'
 import { compose, graphql } from 'react-apollo'
 import { withRouter } from 'react-router-dom'
 import gql from 'graphql-tag'
-import { withStyles } from 'material-ui/styles/index'
-import { Button, CircularProgress, Paper } from 'material-ui'
 import ReactJson from 'react-json-view'
-import SaveIcon from 'material-ui-icons/Save'
 import isEqual from 'lodash/isEqual'
+import withStyles from "@material-ui/core/styles/withStyles";
+import CircularProgress from "@material-ui/core/CircularProgress/CircularProgress";
+import Paper from "@material-ui/core/Paper/Paper";
+import Button from "@material-ui/core/Button/Button";
+import SaveIcon from '@material-ui/icons/Save'
 
 
 const styles = theme => ({

@@ -1,9 +1,14 @@
 import React, { Component } from 'react'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
-import { Dialog, DialogActions, DialogContent, DialogTitle, TextField, Button } from 'material-ui'
-import { withStyles } from 'material-ui/styles/index'
 import { Redirect } from 'react-router-dom'
+import Dialog from "@material-ui/core/Dialog/Dialog";
+import DialogTitle from "@material-ui/core/DialogTitle/DialogTitle";
+import DialogContent from "@material-ui/core/DialogContent/DialogContent";
+import TextField from "@material-ui/core/TextField/TextField";
+import DialogActions from "@material-ui/core/DialogActions/DialogActions";
+import Button from "@material-ui/core/Button/Button";
+import withStyles from "@material-ui/core/styles/withStyles";
 
 const styles = theme => ({
   root: {

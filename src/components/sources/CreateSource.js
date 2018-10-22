@@ -2,9 +2,13 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
-import { Dialog, DialogActions, DialogContent, DialogTitle, TextField } from 'material-ui'
-import { withStyles } from 'material-ui/styles/index'
-import Button from 'material-ui/Button'
+import Dialog from "@material-ui/core/Dialog/Dialog";
+import DialogTitle from "@material-ui/core/DialogTitle/DialogTitle";
+import DialogContent from "@material-ui/core/DialogContent/DialogContent";
+import TextField from "@material-ui/core/TextField/TextField";
+import DialogActions from "@material-ui/core/DialogActions/DialogActions";
+import Button from "@material-ui/core/Button/Button";
+import withStyles from "@material-ui/core/styles/withStyles";
 
 
 const styles = theme => ({

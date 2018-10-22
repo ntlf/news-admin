@@ -2,9 +2,16 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
-import { Button, CircularProgress, Paper, Table, TableBody, TableCell, TableHead, TableRow } from 'material-ui'
-import { withStyles } from 'material-ui/styles'
-import AddIcon from 'material-ui-icons/Add'
+import AddIcon from '@material-ui/icons/Add'
+import CircularProgress from "@material-ui/core/CircularProgress/CircularProgress";
+import Paper from "@material-ui/core/Paper/Paper";
+import Table from "@material-ui/core/Table/Table";
+import TableHead from "@material-ui/core/TableHead/TableHead";
+import TableRow from "@material-ui/core/TableRow/TableRow";
+import TableCell from "@material-ui/core/TableCell/TableCell";
+import TableBody from "@material-ui/core/TableBody/TableBody";
+import Button from "@material-ui/core/Button/Button";
+import withStyles from "@material-ui/core/styles/withStyles";
 
 const styles = theme => ({
   tableRoot: {

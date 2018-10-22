@@ -2,8 +2,14 @@ import React from 'react'
 import { compose, graphql } from 'react-apollo'
 import { withRouter } from 'react-router-dom'
 import gql from 'graphql-tag'
-import { withStyles } from 'material-ui/styles/index'
-import { Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from 'material-ui'
+import CircularProgress from "@material-ui/core/CircularProgress/CircularProgress";
+import Dialog from "@material-ui/core/Dialog/Dialog";
+import DialogTitle from "@material-ui/core/DialogTitle/DialogTitle";
+import DialogContent from "@material-ui/core/DialogContent/DialogContent";
+import TextField from "@material-ui/core/TextField/TextField";
+import DialogActions from "@material-ui/core/DialogActions/DialogActions";
+import Button from "@material-ui/core/Button/Button";
+import withStyles from "@material-ui/core/styles/withStyles";
 
 
 const styles = theme => ({

@@ -1,25 +1,23 @@
 import React from 'react'
-import { withStyles } from 'material-ui/styles'
 import classNames from 'classnames'
-import MenuIcon from 'material-ui-icons/Menu'
-import ChevronLeftIcon from 'material-ui-icons/ChevronLeft'
-import BorderColorIcon from 'material-ui-icons/BorderColor'
-import SettingsIcon from 'material-ui-icons/Settings'
-import ExitToAppIcon from 'material-ui-icons/ExitToApp'
-import ChevronRightIcon from 'material-ui-icons/ChevronRight'
-import {
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  Drawer,
-  AppBar,
-  Toolbar,
-  List,
-  Typography,
-  Divider,
-  IconButton
-} from 'material-ui'
 import { withRouter } from 'react-router-dom'
+import { withStyles } from '@material-ui/core/styles';
+import Drawer from '@material-ui/core/Drawer';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import List from '@material-ui/core/List';
+import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import ListItemText from "@material-ui/core/ListItemText/ListItemText";
+import ListItem from "@material-ui/core/ListItem/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon/ListItemIcon";
+import BorderColorIcon from '@material-ui/icons/BorderColor';
+import SettingsIcon from '@material-ui/icons/Settings';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 const drawerWidth = 240
 
