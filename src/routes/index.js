@@ -5,11 +5,16 @@ import ListSource from '../components/sources/ListSource';
 import CreateSource from '../components/sources/CreateSource';
 import DetailSource from '../components/sources/DetailSource';
 import Config from '../components/Config';
+import Register from '../components/Register';
 
 export const publicRoutes = [
   {
     path: '/login',
     component: Login
+  },
+  {
+    path: '/register',
+    component: Register
   }
 ];
 

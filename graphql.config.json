@@ -1,0 +1,14 @@
+{
+  "schema": {
+    "request": {
+      "url": "https://api.graph.cool/simple/v1/cjcol6bod1cuh0170hkw0xf51",
+      "method": "POST",
+      "postIntrospectionQuery": true,
+      "options": {
+        "headers": {
+          "user-agent": "JS GraphQL"
+        }
+      }
+    }
+  }
+}

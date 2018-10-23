@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
-import { Redirect } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField/TextField';
 import Button from '@material-ui/core/Button/Button';
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -25,50 +24,44 @@ const styles = theme => ({
   }
 });
 
-const SIGNIN_USER = gql`
-  mutation SigninUser($email: String!, $password: String!) {
-    signinUser(email: { email: $email, password: $password }) {
-      token
+const CREATE_USER = gql`
+  mutation CreateUser($email: String!, $password: String!) {
+    createUser(
+      authProvider: { email: { email: $email, password: $password } }
+    ) {
+      id
     }
   }
 `;
 
-class Login extends Component {
+class Register extends Component {
   state = {
     email: '',
-    password: ''
+    password: '',
+    passwordAgain: ''
   };
 
   static propTypes = {
     classes: PropTypes.shape().isRequired,
-    history: PropTypes.shape().isRequired,
-    location: PropTypes.shape().isRequired
+    history: PropTypes.shape().isRequired
   };
 
   render() {
-    const { classes, history, location } = this.props;
-    const { email, password } = this.state;
-    const { from } = location.state || {
-      from: { pathname: '/home' }
-    };
-
-    if (localStorage.getItem('newsToken')) {
-      return <Redirect to={from} push />;
-    }
+    const { classes, history } = this.props;
+    const { email, password, passwordAgain } = this.state;
 
     return (
       <Mutation
-        mutation={SIGNIN_USER}
-        onCompleted={data => {
-          localStorage.setItem('newsToken', data.signinUser.token);
-          Notification.show({ message: 'Successfull login' });
-          history.replace(from);
+        mutation={CREATE_USER}
+        onCompleted={() => {
+          Notification.show({ message: 'Successfull registration' });
+          history.push('/login');
         }}
       >
         {signinUser => (
           <Paper className={classes.root} elevation={1}>
             <Typography variant="h5">News Admin</Typography>
-            <Typography variant="h6">Login</Typography>
+            <Typography variant="h6">Registration</Typography>
             <form
               onSubmit={e => {
                 e.preventDefault();
@@ -97,20 +90,27 @@ class Login extends Component {
                 autoComplete="off"
                 fullWidth
               />
+              <TextField
+                label="Password Again"
+                value={passwordAgain}
+                onChange={e => this.setState({ passwordAgain: e.target.value })}
+                margin="normal"
+                type="password"
+                autoComplete="off"
+                fullWidth
+                error={password !== passwordAgain}
+              />
               <div className={classes.action}>
-                <Button
-                  color="primary"
-                  onClick={() => history.push('/register')}
-                >
-                  Register
+                <Button color="primary" onClick={() => history.push('/login')}>
+                  Login
                 </Button>
                 <Button
                   type="submit"
                   color="primary"
                   variant="contained"
-                  disabled={!email || !password}
+                  disabled={password !== passwordAgain || !email || !password}
                 >
-                  Login
+                  Register
                 </Button>
               </div>
             </form>
@@ -121,4 +121,4 @@ class Login extends Component {
   }
 }
 
-export default withStyles(styles)(Login);
+export default withStyles(styles)(Register);

@@ -7,6 +7,7 @@ import ApolloClient from 'apollo-boost';
 import { BrowserRouter as Router } from 'react-router-dom';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
+import CssBaseline from '@material-ui/core/CssBaseline/CssBaseline';
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 
@@ -32,6 +33,7 @@ ReactDOM.render(
   <Router>
     <ApolloProvider client={client}>
       <MuiThemeProvider theme={theme}>
+        <CssBaseline />
         <App />
       </MuiThemeProvider>
     </ApolloProvider>

@@ -19,7 +19,6 @@ import ListItemIcon from '@material-ui/core/ListItemIcon/ListItemIcon';
 import BorderColorIcon from '@material-ui/icons/BorderColor';
 import SettingsIcon from '@material-ui/icons/Settings';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import CssBaseline from '@material-ui/core/CssBaseline/CssBaseline';
 
 const drawerWidth = 240;
 
@@ -102,7 +101,6 @@ class MiniDrawer extends Component {
 
     return (
       <div className={classes.root}>
-        <CssBaseline />
         <AppBar
           position="fixed"
           className={classNames(classes.appBar, {
