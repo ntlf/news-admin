@@ -150,7 +150,7 @@ class MiniDrawer extends Component {
               </ListItemIcon>
               <ListItemText primary="Sources" />
             </ListItem>
-            <ListItem button onClick={() => history.push('/config')}>
+            <ListItem button onClick={() => history.push('/configs')}>
               <ListItemIcon>
                 <SettingsIcon />
               </ListItemIcon>
