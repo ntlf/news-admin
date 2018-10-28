@@ -9,17 +9,18 @@ import Button from '@material-ui/core/Button/Button';
 import SaveIcon from '@material-ui/icons/Save';
 import PropTypes from 'prop-types';
 import Loading from '../Loading';
+import ConfigForm from './ConfigForm';
+import Tabs from '@material-ui/core/Tabs/Tabs';
+import Tab from '@material-ui/core/Tab/Tab';
+import ConfigJson from './ConfigJson';
 
 const styles = theme => ({
   root: {
     marginTop: theme.spacing.unit * 3,
     padding: theme.spacing.unit * 3
   },
-  progress: {
-    margin: `0 ${theme.spacing.unit * 2}px`
-  },
   fab: {
-    position: 'absolute',
+    position: 'fixed',
     top: theme.spacing.unit * 5,
     right: theme.spacing.unit * 2,
     zIndex: 9999
@@ -51,7 +52,8 @@ const CONFIG_AND_USER = gql`
 
 class Config extends React.Component {
   state = {
-    localData: undefined
+    localData: undefined,
+    tab: 0
   };
 
   static propTypes = {
@@ -60,9 +62,13 @@ class Config extends React.Component {
     match: PropTypes.shape().isRequired
   };
 
+  handleTabChange = (event, tab) => {
+    this.setState({ tab });
+  };
+
   render() {
     const { classes, match, history } = this.props;
-    const { localData } = this.state;
+    const { localData, tab } = this.state;
 
     return (
       <Query
@@ -106,22 +112,30 @@ class Config extends React.Component {
                   </Button>
                 )}
               </Mutation>
-              <Paper className={classes.root}>
-                <ReactJson
-                  name={false}
-                  collapsed={false}
-                  src={localData}
-                  collapseStringsAfterLength={32}
-                  onEdit={e => this.setState({ localData: e.updated_src })}
-                  onDelete={e => this.setState({ localData: e.updated_src })}
-                  onAdd={e => this.setState({ localData: e.updated_src })}
-                  displayObjectSize
-                  enableClipboard={false}
-                  indentWidth={4}
-                  displayDataTypes={false}
-                  iconStyle="triangle"
-                />
-              </Paper>
+              <Tabs
+                value={tab}
+                onChange={this.handleTabChange}
+                indicatorColor="primary"
+                textColor="primary"
+                centered
+              >
+                <Tab label="Form" />
+                <Tab label="JSON" />
+              </Tabs>
+              {tab === 0 &&
+                localData && (
+                  <ConfigForm
+                    data={localData}
+                    onChange={data => this.setState({ localData: data })}
+                  />
+                )}
+              {tab === 1 &&
+                localData && (
+                  <ConfigJson
+                    data={localData}
+                    onChange={data => this.setState({ localData: data })}
+                  />
+                )}
             </>
           );
         }}

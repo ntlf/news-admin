@@ -16,7 +16,6 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItemText from '@material-ui/core/ListItemText/ListItemText';
 import ListItem from '@material-ui/core/ListItem/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon/ListItemIcon';
-import BorderColorIcon from '@material-ui/icons/BorderColor';
 import SettingsIcon from '@material-ui/icons/Settings';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
@@ -144,12 +143,6 @@ class MiniDrawer extends Component {
           </div>
           <Divider />
           <List className={classes.list}>
-            <ListItem button onClick={() => history.push('/sources')}>
-              <ListItemIcon>
-                <BorderColorIcon />
-              </ListItemIcon>
-              <ListItemText primary="Sources" />
-            </ListItem>
             <ListItem button onClick={() => history.push('/configs')}>
               <ListItemIcon>
                 <SettingsIcon />

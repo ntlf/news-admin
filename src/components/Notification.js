@@ -57,6 +57,7 @@ class Notification extends React.Component {
           horizontal: 'left'
         }}
         message={
+          // eslint-disable-next-line react/no-danger
           <span id="message-id" dangerouslySetInnerHTML={{ __html: message }} />
         }
         autoHideDuration={6000}
