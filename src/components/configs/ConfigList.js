@@ -8,7 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import TablePagination from '@material-ui/core/TablePagination/TablePagination';
-import Query from 'react-apollo/Query';
+import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import Loading from '../Loading';
 

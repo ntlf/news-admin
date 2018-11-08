@@ -127,9 +127,10 @@ class Config extends React.Component {
                     onChange={data =>
                       this.setState(state => ({
                         localData: {
-                          base_urls: state.localData.base_urls.map(
-                            (site, i) => ({ ...site, ...data.base_urls[i] })
-                          )
+                          base_urls: data.base_urls.map((site, i) => ({
+                            ...site,
+                            ...state.localData.base_urls[i]
+                          }))
                         }
                       }))
                     }
