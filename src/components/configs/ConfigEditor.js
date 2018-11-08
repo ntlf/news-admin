@@ -124,7 +124,15 @@ class Config extends React.Component {
                 localData && (
                   <ConfigForm
                     data={localData}
-                    onChange={data => this.setState({ localData: data })}
+                    onChange={data =>
+                      this.setState(state => ({
+                        localData: {
+                          base_urls: state.localData.base_urls.map(
+                            (site, i) => ({ ...site, ...data.base_urls[i] })
+                          )
+                        }
+                      }))
+                    }
                   />
                 )}
               {tab === 1 &&

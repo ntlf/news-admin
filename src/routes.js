@@ -4,7 +4,6 @@ import Home from './components/Home';
 import Register from './components/Register';
 import ConfigEditor from './components/configs/ConfigEditor';
 import ConfigList from './components/configs/ConfigList';
-import ConfigForm from './components/configs/ConfigForm';
 
 export const publicRoutes = [
   {
