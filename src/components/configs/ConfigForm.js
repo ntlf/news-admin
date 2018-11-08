@@ -10,12 +10,59 @@ import {
   withStyles
 } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography/Typography';
+import IconButton from '@material-ui/core/IconButton/IconButton';
+import ClearIcon from '@material-ui/icons/Clear';
+import AddIcon from '@material-ui/icons/Add';
+import { green } from '@material-ui/core/colors';
 
 const styles = theme => ({
   root: {
-    marginTop: theme.spacing.unit * 3,
-    padding: theme.spacing.unit * 3
-  }
+    marginTop: theme.spacing.unit * 4,
+    padding: theme.spacing.unit * 4,
+    position: 'relative'
+  },
+  addSite: {
+    color: 'white',
+    backgroundColor: green[500],
+    '&:hover': {
+      backgroundColor: green[700]
+    },
+    marginLeft: theme.spacing.unit * 2,
+    marginTop: theme.spacing.unit * 2
+  },
+  heuristicWrapper: {
+    position: 'relative',
+    padding: theme.spacing.unit * 2,
+    paddingBottom: theme.spacing.unit * 8
+  },
+  addHeuristic: {
+    position: 'absolute',
+    color: 'white',
+    backgroundColor: green[500],
+    '&:hover': {
+      backgroundColor: green[700]
+    },
+    bottom: theme.spacing.unit * 2,
+    left: theme.spacing.unit * 2
+  },
+  removeSite: {
+    position: 'absolute',
+    top: theme.spacing.unit * 2,
+    right: theme.spacing.unit * 2
+  },
+  heuristicItem: {
+    display: 'flex',
+    alignItems: 'flex-end'
+  },
+  heuristicKey: {
+    width: '30%',
+    marginRight: theme.spacing.unit * 2
+  },
+  heuristicValue: {
+    width: '30%',
+    marginRight: theme.spacing.unit * 2
+  },
+  removeHeuristic: {}
 });
 
 class ConfigForm extends Component {
@@ -226,55 +273,71 @@ class ConfigForm extends Component {
                 </MenuItem>
               ))}
             </TextField>
-            <Typography variant="h6">Overwrite Heuristics</Typography>
-            {site.overwriteHeuristics.map(({ name, value }, j) => (
-              <div key={j}>
-                <TextField
-                  label="Name"
-                  value={name}
-                  onChange={this.handleChange(sites, i, (site, value) => {
-                    const newOverwriteHeuristics = site.overwriteHeuristics.map(
-                      (heuristic, k) => {
-                        if (j !== k) return heuristic;
+            <div className={classes.heuristicWrapper}>
+              <Typography variant="subtitle2">Overwrite Heuristics</Typography>
+              {site.overwriteHeuristics.map(({ name, value }, j) => (
+                <div key={j} className={classes.heuristicItem}>
+                  <TextField
+                    label="Name"
+                    value={name}
+                    className={classes.heuristicKey}
+                    onChange={this.handleChange(sites, i, (site, value) => {
+                      const newOverwriteHeuristics = site.overwriteHeuristics.map(
+                        (heuristic, k) => {
+                          if (j !== k) return heuristic;
 
-                        return { ...heuristic, name: value };
-                      }
-                    );
+                          return { ...heuristic, name: value };
+                        }
+                      );
 
-                    return {
-                      ...site,
-                      overwriteHeuristics: newOverwriteHeuristics
-                    };
-                  })}
-                  margin="normal"
-                />
-                <TextField
-                  label="Value"
-                  value={value}
-                  onChange={this.handleChange(sites, i, (site, value) => {
-                    const newOverwriteHeuristics = site.overwriteHeuristics.map(
-                      (heuristic, k) => {
-                        if (j !== k) return heuristic;
+                      return {
+                        ...site,
+                        overwriteHeuristics: newOverwriteHeuristics
+                      };
+                    })}
+                    margin="normal"
+                  />
+                  <TextField
+                    label="Value"
+                    value={value}
+                    onChange={this.handleChange(sites, i, (site, value) => {
+                      const newOverwriteHeuristics = site.overwriteHeuristics.map(
+                        (heuristic, k) => {
+                          if (j !== k) return heuristic;
 
-                        return { ...heuristic, value };
-                      }
-                    );
+                          return { ...heuristic, value };
+                        }
+                      );
 
-                    return {
-                      ...site,
-                      overwriteHeuristics: newOverwriteHeuristics
-                    };
-                  })}
-                  margin="normal"
-                />
-                <Button onClick={this.removeOverwriteHeuristics(sites, i, j)}>
-                  Remove Heuristic
-                </Button>
-              </div>
-            ))}
-            <Button onClick={this.addOverwriteHeuristics(sites, i)}>
-              Add Heuristic
-            </Button>
+                      return {
+                        ...site,
+                        overwriteHeuristics: newOverwriteHeuristics
+                      };
+                    })}
+                    margin="normal"
+                  />
+                  <IconButton
+                    color="secondary"
+                    aria-label="Remove heuristic"
+                    className={classes.removeHeuristic}
+                    onClick={this.removeOverwriteHeuristics(sites, i, j)}
+                  >
+                    <ClearIcon />
+                  </IconButton>
+                </div>
+              ))}
+
+              <Button
+                variant="fab"
+                mini
+                color="secondary"
+                aria-label="Add"
+                className={classes.addHeuristic}
+                onClick={this.addOverwriteHeuristics(sites, i)}
+              >
+                <AddIcon />
+              </Button>
+            </div>
             <TextField
               label="Pass heuristics condition"
               value={site.passHeuristicsCondition}
@@ -285,10 +348,25 @@ class ConfigForm extends Component {
               margin="normal"
               fullWidth
             />
-            <Button onClick={this.removeSite(sites, i)}>Remove Site</Button>
+            <IconButton
+              color="secondary"
+              aria-label="Remove site"
+              className={classes.removeSite}
+              onClick={this.removeSite(sites, i)}
+            >
+              <ClearIcon />
+            </IconButton>
           </Paper>
         ))}
-        <Button onClick={this.addSite(sites)}>Add Site</Button>
+        <Button
+          variant="fab"
+          color="secondary"
+          aria-label="Add site"
+          className={classes.addSite}
+          onClick={this.addSite(sites)}
+        >
+          <AddIcon />
+        </Button>
       </form>
     );
   }

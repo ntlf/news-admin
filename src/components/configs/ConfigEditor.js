@@ -128,8 +128,8 @@ class Config extends React.Component {
                       this.setState(state => ({
                         localData: {
                           base_urls: data.base_urls.map((site, i) => ({
-                            ...site,
-                            ...state.localData.base_urls[i]
+                            ...state.localData.base_urls[i],
+                            ...site
                           }))
                         }
                       }))
