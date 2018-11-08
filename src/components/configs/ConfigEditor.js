@@ -1,17 +1,15 @@
 import React from 'react';
 import { Mutation, Query } from 'react-apollo';
 import gql from 'graphql-tag';
-import ReactJson from 'react-json-view';
 import isEqual from 'lodash/isEqual';
 import withStyles from '@material-ui/core/styles/withStyles';
-import Paper from '@material-ui/core/Paper/Paper';
 import Button from '@material-ui/core/Button/Button';
 import SaveIcon from '@material-ui/icons/Save';
 import PropTypes from 'prop-types';
-import Loading from '../Loading';
-import ConfigForm from './ConfigForm';
 import Tabs from '@material-ui/core/Tabs/Tabs';
 import Tab from '@material-ui/core/Tab/Tab';
+import Loading from '../Loading';
+import ConfigForm from './ConfigForm';
 import ConfigJson from './ConfigJson';
 
 const styles = theme => ({
