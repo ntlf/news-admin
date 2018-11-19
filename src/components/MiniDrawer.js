@@ -117,8 +117,13 @@ class MiniDrawer extends Component {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" color="inherit" noWrap>
-              News Admin
+            <Typography
+              variant="h6"
+              color="inherit"
+              noWrap
+              onClick={() => history.push('/home')}
+            >
+              HírPlacc Admin
             </Typography>
           </Toolbar>
         </AppBar>
