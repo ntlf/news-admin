@@ -61,7 +61,7 @@ class Login extends Component {
         mutation={SIGNIN_USER}
         onCompleted={data => {
           localStorage.setItem('newsToken', data.signinUser.token);
-          Notification.show({ message: 'Successfull login' });
+          Notification.show({ message: 'Successful login' });
           history.replace(from);
         }}
       >
